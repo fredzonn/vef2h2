@@ -5,7 +5,6 @@ const baseurl:string | undefined = process.env.REACT_APP_API_URL;
 
 async function getProduct(id: number | string) : Promise<IProduct> {
   // todo sækja vöru
-
   const product: IProduct = {
     category: {
       id: 10,
