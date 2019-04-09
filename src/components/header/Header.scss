@@ -1,5 +1,13 @@
 @import '../../config.scss';
 
 .header {
-  color: black;
+    display: flex;
+    background-color: $color-font;
+
+}
+.header__content {
+    display: flex;
+    margin: $gutter;
+    flex-flow: row wrap;
+    justify-content: flex-end;
 }
