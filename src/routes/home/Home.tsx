@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <Fragment>
       <Helmet title="Forsíða" />
-      <p>Home</p>
+      <h2>Nýjar vörur</h2>
     </Fragment>
   );
 }

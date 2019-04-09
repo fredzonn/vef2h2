@@ -8,6 +8,19 @@
 .header__content {
     display: flex;
     margin: $gutter;
-    flex-flow: row wrap;
-    justify-content: flex-end;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+}
+
+.header__links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 13rem;
+}
+
+a {
+    padding-left: 1rem;
+    color: white;
+    text-decoration: none;
 }
