@@ -5,18 +5,22 @@ const baseurl:string | undefined = process.env.REACT_APP_API_URL;
 
 async function getProduct(id: number | string) : Promise<IProduct> {
   // todo sækja vöru
+  const url = new URL('/', baseurl);
+  const response = await fetch(url.href)
+  const data = await response.json();
+
   const product: IProduct = {
     category: {
       id: 10,
       title: "Flokkur",
     },
-    id: 1,
-    image: '',
-    price: 100,
-    title: "Prufuvara",
+    id: data.id,
+    image: data.image,
+    price: data.price,
+    title: data.title,
   };
 
-  return new Promise((resolve) => resolve(product))
+  return product;
 }
 
 export {
