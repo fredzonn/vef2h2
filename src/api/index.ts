@@ -4,7 +4,6 @@ import { IProduct } from './types';
 const baseurl:string | undefined = process.env.REACT_APP_API_URL;
 
 async function getProduct(id: number | string) : Promise<IProduct> {
-  // todo sækja vöru
   const url = new URL('/', baseurl);
   const response = await fetch(url.href)
   const data = await response.json();

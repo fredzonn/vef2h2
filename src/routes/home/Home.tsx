@@ -1,5 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import Helmet from 'react-helmet';
+
+import { getProduct } from '../../api/index';
 
 import './Home.scss';
 
