@@ -14,4 +14,9 @@ export interface IProduct {
   updated?: Date;
 }
 
+export interface IApiResult {
+  data: any,
+  ok: boolean,
+}
+
 // todo fleiri týpur
