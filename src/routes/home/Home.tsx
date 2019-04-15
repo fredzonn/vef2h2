@@ -6,7 +6,6 @@ import { getProduct } from '../../api/index';
 import './Home.scss';
 
 export default function Home() {
-
   return (
     <Fragment>
       <Helmet title="Forsíða" />
