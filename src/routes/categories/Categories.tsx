@@ -1,5 +1,6 @@
-import React from 'react';
-import { getProduct, getCategories } from '../../api/index';
+//import React from 'react';
+import { getProduct, getCategories, getCategor } from '../../api/index';
+import React, { Fragment, useState, useEffect } from 'react';
 
 export default async function CategoriesRoute() {
   //const data = await getProduct(1);
@@ -9,18 +10,29 @@ export default async function CategoriesRoute() {
   async function onFetchNewData(name: string) {
      /*setErTad(!erTad);
      setData(await getTodos(!erTad));*/
-    const data = await getCategories("");
+     const data = await getCategor("");
     console.log("data blaaaa: ", data );
     return data;
-   }
-  var data = await onFetchNewData("");
-  console.log("data í cat: ",data);
+  }
+  //var data = await onFetchNewData("");
+  //console.log("data í cat: ",data);
+
+  const [product, setProduct] = useState();
+
+  useEffect(() => {
+      const fetchProduct = async () => {
+             const result = await getCategories(2,2);
+             setProduct(result);
+      }
+    fetchProduct();
+  }, []);
+  //var data = await useEffect();
 
   return (
 
     <React.Fragment>
     <p>categories</p>
-    {data.map((item:any, i:any) => (
+    {product.map((item:any, i:any) => (
       <div>Hæ </div>
     ))}
     </React.Fragment>
