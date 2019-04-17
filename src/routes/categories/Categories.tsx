@@ -28,13 +28,23 @@ export default async function CategoriesRoute() {
   }, []);
   //var data = await useEffect();
 
+  fall(prod:IProduct | undefined){
+   if(prod !== undefined){
+      return (html kóði);
+   }else{
+     return '';
+   }
+  }
+
   return (
 
     <React.Fragment>
     <p>categories</p>
-    {product.map((item:any, i:any) => (
+    {
+      <div>{fall(data)}</div>
+      /*product.map((item:any, i:any) => (
       <div>Hæ </div>
-    ))}
+    ))*/}
     </React.Fragment>
   );
 }
