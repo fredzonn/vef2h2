@@ -1,4 +1,5 @@
 import { IProduct, ICategory } from './types';
+import { number } from 'prop-types';
 
 // Sækja slóð á API úr env
 const baseurl:string | undefined = process.env.REACT_APP_API_URL;
@@ -23,6 +24,30 @@ async function getProduct(id: number | string) : Promise<IProduct> {
 
   return product;
 }
+
+async function getProducts(offset:Number, limit:Number) : Promise<IProduct[]> {
+  const url = new URL('/products/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
+  const response = await fetch(url.href);
+  const JSONgogn = response.json();
+  const arr:IProduct[] = [];
+
+  const prods = JSONgogn.then(function(data){
+    console.log("datað er þetta: ",data);
+    data.items.forEach(function(element: { id: number; title: string; price: number; image: string; category: ICategory; }) {
+      const products: IProduct = {
+        id: element.id,
+        title: element.title,
+        price: element.price,
+        image: element.image,
+        category: element.category,
+      };
+      arr.push(products);
+    });
+    return arr;
+  });
+  return new Promise((resolve) => resolve(prods))
+}
+
 async function getCategor(/*id: number | string |undefined*/) /*: Promise<ICategory[]>*/ {
   const url = new URL('/categories', baseurl);
   const response = await fetch(url.href)
@@ -103,6 +128,7 @@ async function getCategory(category:String) : Promise<ICategory[]> {
 
 export {
   getProduct,
+  getProducts,
   getCategories,
   getCategor,
   getCategory,
