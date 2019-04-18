@@ -80,21 +80,28 @@ async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]>
   return new Promise((resolve) => resolve(cats))
 }
 
-async function getCategory(category:String) : Promise<ICategory[]> {
+async function getCategory(category:Number) : Promise<IProduct[]> {
   // todo sækja vöru
-  const url = new URL('/products/'+'?category'+"'"+category+"'", baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
+  console.log("ÞETTA ER CATEGORY: ",category)
+  const url = new URL('/products'+'?category='+category, baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
   const response = await fetch(url.href);
   const JSONgogn = response.json();
-  const arr:ICategory[] = [];
+  const arr:IProduct[] = [];
 
   const cats = JSONgogn.then(function(data){
     console.log("gögn er þetta: ",data);
-    data.items.forEach(function(element: { id: number; title: string; }) {
-      const category: ICategory = {
+    data.items.forEach(function(element: { id: number; title: string; image: string; price:number; category_id: number; category_title: string }) {
+      const product: IProduct = {
+        category: {
+          id: element.category_id,
+          title: element.category_title,
+        },
         id: element.id,
+        image: element.image,
+        price: element.price,
         title: element.title,
       };
-      arr.push(category);
+      arr.push(product);
     });
     return arr;
   });
