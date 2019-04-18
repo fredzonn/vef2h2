@@ -5,24 +5,32 @@ import { number } from 'prop-types';
 const baseurl:string | undefined = process.env.REACT_APP_API_URL;
 console.log(baseurl);
 
-async function getProduct(id: number | string) : Promise<IProduct> {
-  const url = new URL('/products/'+id, baseurl);
-  const response = await fetch(url.href)
-  const data = await response.json();
-  console.log("data úr index.ts: ",data);
+async function getProduct(product:Number) : Promise<IProduct[]> {
+  // todo sækja vöru
+  console.log("ÞETTA ER PRODUCT: ",product)
+  const url = new URL('/products'+'?product='+ product, baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
+  const response = await fetch(url.href);
+  const JSONgogn = response.json();
+  const arr:IProduct[] = [];
 
-  const product: IProduct = {
-    category: {
-      id: 10,
-      title: "Flokkur",
-    },
-    id: data.id,
-    image: data.image,
-    price: data.price,
-    title: data.title,
-  };
-
-  return product;
+  const prod = JSONgogn.then(function(data){
+    console.log("gögn er þetta: ",data);
+    data.items.forEach(function(element: { id: number; title: string; image: string; price:number; category_id: number; category_title: string }) {
+      const product: IProduct = {
+        category: {
+          id: element.category_id,
+          title: element.category_title,
+        },
+        id: element.id,
+        image: element.image,
+        price: element.price,
+        title: element.title,
+      };
+      arr.push(product);
+    });
+    return arr;
+  });
+  return new Promise((resolve) => resolve(prod))
 }
 
 async function getProducts(offset:Number, limit:Number) : Promise<IProduct[]> {
