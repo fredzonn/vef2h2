@@ -38,6 +38,7 @@ function App(props: Props) {
             <Route path="/login" exact component={Login} />
             <Route path="/categories/" exact component={Categories} />
             <Route path="/categories/:id" exact component={Category} />
+            <Route path="/product/" exact component={Product} />
             <Route path="/product/:id" exact component={Product} />
             <Route path="/cart" exact component={Cart} />
             <Route path="/orders" exact component={Orders} />
