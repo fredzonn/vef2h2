@@ -2,12 +2,12 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_LOGOUT } from '../ac
 
 // Ef það er notandi í localStorage erum við með innskráðan notanda
 // hér gætum við líka sótt token
-const user = JSON.parse(localStorage.getItem('user') || 'null');
+// const user = JSON.parse(localStorage.getItem('user') || 'null');
 
 const initialState = {
     isFetching: false,
-    isAuthenticated: !!user,
-    user, // setjum vistaðan notanda í upphafsstöðu
+    isAuthenticated: false,
+    user: null, // setjum vistaðan notanda í upphafsstöðu
 };
 
 export default (state = initialState, action) => {
