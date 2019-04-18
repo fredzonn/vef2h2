@@ -80,9 +80,31 @@ async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]>
   return new Promise((resolve) => resolve(cats))
 }
 
+async function getCategory(category:String) : Promise<ICategory[]> {
+  // todo sækja vöru
+  const url = new URL('/products/'+'?category'+"'"+category+"'", baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
+  const response = await fetch(url.href);
+  const JSONgogn = response.json();
+  const arr:ICategory[] = [];
+
+  const cats = JSONgogn.then(function(data){
+    console.log("gögn er þetta: ",data);
+    data.items.forEach(function(element: { id: number; title: string; }) {
+      const category: ICategory = {
+        id: element.id,
+        title: element.title,
+      };
+      arr.push(category);
+    });
+    return arr;
+  });
+  return new Promise((resolve) => resolve(cats))
+}
+
 export {
   getProduct,
   getCategories,
   getCategor,
+  getCategory,
 
 };
