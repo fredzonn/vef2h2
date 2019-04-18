@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { getProduct, getCategories, getCategor, getCategory } from '../../api/index';
 
-export default function Category({props} : { props: any}) {
+export default function Category(/*{props} : { props: any}*/props: any) {
 
-  //const { index } = props;
-  /*console.log(props);
-  Category.getInitialProps();
+  //const { id } = props;
+  var id = props.location.pathname[props.location.pathname.length -1];
+  console.log(props.location.pathname, id);
+  //Category.getInitialProps();
   return (
     <p>category</p>
-  )*/
+  )
 }
 
-/*Category.getInitialProps = async ({query} : { query: any}) => {
+Category.getInitialProps = async ({query} : { query: any}) => {
   const{index} = query;
   //const todo = await getCategory(index);
   console.log("loggi logg")
 
   return { index };
-}*/
+}
 
 
 
