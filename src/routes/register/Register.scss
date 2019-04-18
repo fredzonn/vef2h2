@@ -1,4 +1,20 @@
 @import '../../config.scss';
 
-.register {
+.register__container {
+    margin-top: 2*$gutter;
+    width: 500px;
+  }
+  
+.register__header {
+    margin-bottom: $gutter;
+  }
+
+.button__container {
+  margin-top: $gutter;
+  margin-bottom: $gutter;
+}
+
+.navlink__container a {
+  color: black;
+  padding-left: 0;
 }
