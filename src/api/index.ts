@@ -23,23 +23,23 @@ async function getProduct(id: number | string) : Promise<IProduct> {
 
   return product;
 }
-async function getCategor(id: number | string |undefined) : Promise<ICategory[]> {
-  const url = new URL('/categories/'+id, baseurl);
+async function getCategor(/*id: number | string |undefined*/) /*: Promise<ICategory[]>*/ {
+  const url = new URL('/categories', baseurl);
   const response = await fetch(url.href)
-  //const data = await response.json();
+  const data = await response.json();
   //console.log("data úr index.ts: ",data.items);
 
-  const prods: ICategory[] = await response.json();
+  //const prods: ICategory[] = await response.json();
   //console.log("prod er: ", data.items);
   /*const product: ICategory = {
     id: data.items[1].id,
     title: data.items[1].title,
   };
   console.log("product: ", product);*/
-  return prods;
+  return data;
 }
 
-async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]> {
+/*async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]> {
   // todo sækja vöru
   const url = new URL('/categories/'+1, baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
   const response = await fetch(url.href);
@@ -47,6 +47,27 @@ async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]>
   const arr:ICategory[] = [];
 
   const cats = JSONgogn.then(function(data){
+    cats.forEach(function(element: { id: number; title: string; }) {
+      const category: ICategory = {
+        id: element.id,
+        title: element.title,
+      };
+      arr.push(category);
+    });
+    return arr;
+  });
+  return new Promise((resolve) => resolve(cats))
+}*/
+
+async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]> {
+  // todo sækja vöru
+  const url = new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
+  const response = await fetch(url.href);
+  const JSONgogn = response.json();
+  const arr:ICategory[] = [];
+
+  const cats = JSONgogn.then(function(data){
+    console.log("datað er þetta: ",data);
     data.items.forEach(function(element: { id: number; title: string; }) {
       const category: ICategory = {
         id: element.id,
