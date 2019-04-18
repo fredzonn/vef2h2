@@ -1,0 +1,18 @@
+.field__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .field__input {
+    height: 32px;
+    width: 340px;
+  }
+  
+  @media (max-width: 500px) {
+    .field__input {
+      width: 200px;
+      height: 32px;
+    }
+  }
