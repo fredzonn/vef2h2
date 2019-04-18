@@ -69,13 +69,7 @@ export function Login(props: ILoginProps, state: ILoginState) {
       <Helmet title="Innskráning" />
       <div className="login__container">
         <h1 className="login__header">Innskráning</h1>
-        {message && (
-          <ul>
-            {message.map((error, i) =>
-              <li key={i}>{error}</li>
-            )}
-          </ul>
-        )}
+        <div>{message}</div>
         <form className="form__default" onSubmit={handleSubmit}>
           <Field
             name="username"

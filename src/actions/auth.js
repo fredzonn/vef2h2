@@ -54,14 +54,21 @@ export const loginUser = (username, password) => async (dispatch) => {
     } catch (e) {
         return dispatch(loginError(e));
     }
-
+    console.log(login.status);
+    console.log(login.result);
     if (login.status !== 200) {
-        const errorMessage = login.result;
-        let error = [];
-        errorMessage.forEach(el => {
-            error.push(el.error);
-        });
-        return dispatch(loginError(error));
+        const { error } = login.result;
+        if (error) {
+            return dispatch(loginError(error));
+        } else {
+            const errorMessage = login.result;
+            let error = [];
+            errorMessage.forEach(el => {
+                error.push(el.error);
+            });
+            return dispatch(loginError(error));
+        }
+
     }
     const { token } = login.result;
     window.localStorage.setItem('token', token);
