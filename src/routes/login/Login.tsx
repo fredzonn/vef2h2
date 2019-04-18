@@ -11,7 +11,7 @@ interface ILoginProps {
   dispatch: (func: any) => void;
   isFetching: boolean;
   isAuthenticated: boolean;
-  message: string;
+  message: Array<string>;
 }
 
 interface ILoginState {
@@ -39,8 +39,6 @@ export function Login(props: ILoginProps, state: ILoginState) {
       password = value;
     }
 
-    console.log(username, password);
-
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
@@ -48,9 +46,6 @@ export function Login(props: ILoginProps, state: ILoginState) {
 
     const { dispatch } = props;
 
-    console.log(username, password);
-
-    //loginUser(username, password);
     dispatch(loginUser(username, password));
   }
 
@@ -73,10 +68,14 @@ export function Login(props: ILoginProps, state: ILoginState) {
     <Fragment>
       <Helmet title="Innskráning" />
       <div className="login__container">
-        {message && (
-          <p>{message}</p>
-        )}
         <h1 className="login__header">Innskráning</h1>
+        {message && (
+          <ul>
+            {message.map((error, i) =>
+              <li key={i}>{error}</li>
+            )}
+          </ul>
+        )}
         <form className="form__default" onSubmit={handleSubmit}>
           <Field
             name="username"
