@@ -1,4 +1,38 @@
 @import '../../config.scss';
 
-.cart {
+.cart__container {
+    margin-top: 2*$gutter;
+    width: 1200px;
+  }
+  
+.cart__header {
+    margin-bottom: $gutter;
+  }
+.cart__item {
+  display:flex;
+  margin-bottom: $gutter;
+}
+
+.cart__item__image {
+}
+
+.cart__item__about {
+  margin-left: 0.5*$gutter;
+  margin-right: $gutter;
+}
+
+.cart__item__addtocart {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40%;
+}
+
+.cart__item__addtocart button {
+}
+.cart__item__addtocart input {
+  width: 40px;
+}
+
+.cart__total {
+  float: right;
 }

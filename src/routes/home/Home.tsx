@@ -79,7 +79,7 @@ export default function Home() {
         </div>
       </div>
 
-      );;
+      );
     } else {
       return '';
     }
@@ -89,7 +89,7 @@ export default function Home() {
     <div className="Hcontainer">
     <Helmet title="Vörur" />
       {loading && (
-          <h2 className="loading">Hleð gögnum...</h2>
+        <h2 className="loading">Hleð gögnum...</h2>
       )}
       {!loading && (
         <div className="Hhaldari">
@@ -102,6 +102,4 @@ export default function Home() {
       )}
     </div>
   );
-  
-  
   }

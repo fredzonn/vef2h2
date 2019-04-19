@@ -44,8 +44,7 @@ export const registerUser = (username, password, email) => {
         } catch (error) {
             return dispatch(signupError(error));
         }
-        console.log(register.status);
-        console.log(register.result);
+
 
         if (register.status !== 201) {
             const { errors } = register.result;

@@ -51,6 +51,7 @@ async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]>
   return new Promise((resolve) => resolve(cats))
 }
 
+
 async function getProducts(offset:Number, limit:Number) : Promise<IProduct[]> {
   const url = new URL('/products/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
   const response = await fetch(url.href);
@@ -105,9 +106,9 @@ async function getCategory(category: Number, search: string, offset: Number, lim
 
 
 interface options {
-  body: any;
+  body?: any;
   headers: any;
-  method: string;
+  method?: string;
 }
 
 async function post(endpoint: string, data: any) {
@@ -133,11 +134,51 @@ async function post(endpoint: string, data: any) {
   return { result, status: response.status };
 }
 
+async function get(endpoint: string) {
+
+  const token = window.localStorage.getItem('token');
+
+  const url = `${baseurl}${endpoint}`;
+
+  const options: options = {
+    headers: {},
+  };
+
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(url, options);
+  const result = await response.json();
+
+  return { result, status: response.status };
+}
+
+async function deleteID(endpoint: string) {
+  const url = `${baseurl}${endpoint}`;
+
+  const options: options = {
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'DELETE',
+  }
+  const token = window.localStorage.getItem('token');
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  await fetch(url, options);
+
+}
+
+
 export {
   getProduct,
   getProducts,
   getCategories,
   getCategory,
   post,
-
+  get,
+  deleteID
 };
