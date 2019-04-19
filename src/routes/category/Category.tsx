@@ -17,7 +17,7 @@ export default function Category(/*{props} : { props: any}*/props: any) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const result = await getCategory(id, "", offset);
+      const result = await getCategory(id, "", offset, 12);
       console.log("þetta er final countdown: ",result[1].category.title);
       setFyrirsogn(result[1].category.title);
       setCategories(result);
@@ -99,7 +99,7 @@ export default function Category(/*{props} : { props: any}*/props: any) {
   async function onClick() {
     console.log("search: ",search);
     setLoading(true);
-    const result = await getCategory(id,search,offset);
+    const result = await getCategory(id,search,offset, 12);
     console.log("þetta er final countdown: ",result);
     setCategories(result);
     setLoading(false);
@@ -110,7 +110,7 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     setOffset(offset+12);
     console.log("all set: ",offset);
     setLoading(true);
-    const result = await getCategory(id,search, offset+12);
+    const result = await getCategory(id,search, offset+12, 12);
     if(result.length===0){
       setErEndir(true);
     }else{
@@ -126,7 +126,7 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     setOffset(offset-12);
     console.log("all set: ",offset);
     setLoading(true);
-    const result = await getCategory(id,search, offset-12);
+    const result = await getCategory(id,search, offset-12, 12);
     if(result.length===0){
       setErEndir(true);
     }else{
