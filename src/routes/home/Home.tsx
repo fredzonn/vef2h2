@@ -47,12 +47,11 @@ export default function Products() {
 
         </div>
 
-      );;
+      );
     } else {
       return '';
     }
   }
-
   return (
     <div className="container">
     <Helmet title="Vörur" />
@@ -72,4 +71,3 @@ export default function Products() {
   
   
   }
-  
