@@ -4,6 +4,15 @@ import { IProduct, ICategory } from '../../api/types';
 import Helmet from 'react-helmet';
 import './Orders.scss';
 
+interface ICartProps {
+  dispatch: (func: any) => void;
+  user: IUser;
+  cart: IOrderLines;
+  isFetching: boolean;
+  message: string;
+  errors: Array<any>;
+}
+
 export default function Orders() {
   const [categories, setCategories] = useState();
   const [search, setSearch] = useState("");
@@ -11,7 +20,6 @@ export default function Orders() {
   const [fyrirsogn, setFyrirsogn] = useState("Fyrirsogn");
   const [offset, setOffset] = useState(0);
   const [erEndir, setErEndir] = useState(false);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,3 +37,16 @@ export default function Orders() {
     <p>orders</p>
   );
 }
+
+
+const mapStateToProps = (state: any) => {
+  return {
+    isFetching: state.getCart.isFetching,
+    cart: state.getCart.cart,
+    user: state.auth.user,
+    message: state.getCart.message,
+    errors: state.orders.message,
+  }
+}
+
+export default connect(mapStateToProps)(Orders);
