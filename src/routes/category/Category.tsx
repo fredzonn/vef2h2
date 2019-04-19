@@ -7,6 +7,9 @@ export default function Category(/*{props} : { props: any}*/props: any) {
   const [categories, setCategories] = useState();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fyrirsogn, setFyrirsogn] = useState("Fyrirsogn");
+  const [offset, setOffset] = useState(0);
+  const [erEndir, setErEndir] = useState(false);
   var parts = props.location.pathname.split('/');
   var id = parts.pop();
   id = parseInt(id);
@@ -14,8 +17,9 @@ export default function Category(/*{props} : { props: any}*/props: any) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const result = await getCategory(id,"");
-      console.log("þetta er final countdown: ",result);
+      const result = await getCategory(id, "", offset);
+      console.log("þetta er final countdown: ",result[1].category.title);
+      setFyrirsogn(result[1].category.title);
       setCategories(result);
       setLoading(false);
     }
@@ -53,7 +57,6 @@ export default function Category(/*{props} : { props: any}*/props: any) {
                 <div>{data.category.title}</div>
                 <div>{data.price}</div>
 
-
             </div>
           ))}
 
@@ -65,11 +68,71 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     }
   }
 
+  function fall2() {
+    if (offset===0) {
+      return (
+
+        <div className="paging">
+          <div>Síða {1+(offset/12)}</div>
+          <button className={"v"} onClick={onClick2}>Næsta síða</button>
+        </div>
+
+      );
+    } else if(erEndir===true){
+      return (
+        <div className="paging">
+          <button className={"v"} onClick={onClick3}>Fyrri síða</button>
+          <div>Síða {1+(offset/12)}</div>
+        </div>
+      );
+    }else{
+      return(
+        <div className="paging">
+          <button className={"v"} onClick={onClick3}>Fyrri síða</button>
+          <div>Síða {1+(offset/12)}</div>
+          <button className={"v"} onClick={onClick2}>Næsta síða</button>
+        </div>
+      );
+    }
+  }
+
   async function onClick() {
-    console.log(search);
+    console.log("search: ",search);
     setLoading(true);
-    const result = await getCategory(id,search);
+    const result = await getCategory(id,search,offset);
     console.log("þetta er final countdown: ",result);
+    setCategories(result);
+    setLoading(false);
+    return //location.href = "categories/"+index;
+  }
+
+  async function onClick2() {
+    setOffset(offset+12);
+    console.log("all set: ",offset);
+    setLoading(true);
+    const result = await getCategory(id,search, offset+12);
+    if(result.length===0){
+      setErEndir(true);
+    }else{
+      setErEndir(false);
+    }
+    console.log("þetta er final countdown: ",result.length);
+    setCategories(result);
+    setLoading(false);
+    return //location.href = "categories/"+index;
+  }
+
+  async function onClick3() {
+    setOffset(offset-12);
+    console.log("all set: ",offset);
+    setLoading(true);
+    const result = await getCategory(id,search, offset-12);
+    if(result.length===0){
+      setErEndir(true);
+    }else{
+      setErEndir(false);
+    }
+    console.log("þetta er final countdown: ",result.length);
     setCategories(result);
     setLoading(false);
     return //location.href = "categories/"+index;
@@ -104,10 +167,11 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     )}
     {!loading && (
       <div className="haldari">
-        <h2>Skoðaðu vöruflokkana okkar</h2>
+        <h2>{fyrirsogn}</h2>
         <input className={"v"} /*type={type}*/ onChange={e => change(e)}/>
         <button className={"v"} onClick={onClick}>Leita</button>
         {fall(categories)}
+        {fall2()}
       </div>
     )}
   </div>
