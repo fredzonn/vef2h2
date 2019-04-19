@@ -55,7 +55,7 @@ export default function CategoriesRoute() {
     )}
     {!loading && (
       <div className="haldari">
-        <h2>Skoðaðu vöruflokkana okkar</h2>
+        <h2 className = "look">Skoðaðu vöruflokkana okkar</h2>
         {fall(categories)}
       </div>
     )}

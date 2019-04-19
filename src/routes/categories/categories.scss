@@ -1,20 +1,31 @@
 @import '../../config.scss';
 
-.productDetails {
-
-}
-
 .categoryinn {
-  width: 100px;
-  font-size: 32px
-}
-
-.category {
-  margin-left: 20px;
-  margin-right: 20px;
+  font-size: 5rem;
 }
 
 .categories {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.category {
+  min-width: 28rem;
+  min-height: 10rem;
+  margin-top: 2rem;
+  border-style: solid;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.category:hover{
+  filter: invert(50%);
+}
+
+.look {
+  margin-top: 1.5rem;
 }

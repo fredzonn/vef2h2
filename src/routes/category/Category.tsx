@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProduct, getCategories, getCategor, getCategory } from '../../api/index';
+import { getCategory } from '../../api/index';
 import { IProduct, ICategory } from '../../api/types';
 import Helmet from 'react-helmet';
 
