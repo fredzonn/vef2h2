@@ -6,7 +6,7 @@ import { IProduct } from '../../api/types';
 import './Home.scss';
 
 
-export default function Products() {
+export default function Home() {
 
   const [products, setProducts] = useState();
   const [loading, setLoading] = useState(false);
@@ -28,14 +28,14 @@ export default function Products() {
     if (product !== undefined) {
       return (
 
-        <div className="products">
+        <div className="Hproducts">
 
           {product.map((data, i) => (
-            <div key={i} className="product">
+            <div key={i} className="Hproduct">
 
-              <div className="product__item" key={data.id || i} onClick={() => onClick(data.id)}>
+              <div className="Hproduct__item" key={data.id || i} onClick={() => onClick(data.id)}>
                 <img src={data.image} width="450" height="300" alt="Image"></img>
-                  <div className = "desc">
+                  <div className = "Hdesc">
                     <h1>{data.title}</h1>
                     <p>{data.category}</p>
                     <h2>{data.price} kr.-</h2>
@@ -53,14 +53,14 @@ export default function Products() {
     }
   }
   return (
-    <div className="container">
+    <div className="Hcontainer">
     <Helmet title="Vörur" />
       {loading && (
           <h2 className="loading">Hleð gögnum...</h2>
       )}
       {!loading && (
-        <div className="haldari">
-          <div className="title">
+        <div className="Hhaldari">
+          <div className="Htitle">
             <h2>Nýjar vörur</h2>
           </div>
           {fall(products)}
