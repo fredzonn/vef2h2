@@ -2,71 +2,54 @@ import React from 'react';
 import Field from '../field/Field';
 import Button from '../button/Button';
 import { connect } from 'react-redux';
-import { IUser, IOrderLines } from '../../api/types';
-import { deleteCartID } from '../../actions/getCart';
+import { postCart } from '../../actions/getCart';
 
 interface IAddToCartState {
-  fjoldi: any;
-  total: any;
-  voruNR: any;
+    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+    fjoldi?: number;
+    voruNR?: number;
 }
 
-interface ICartProps {
-  dispatch: (func: any) => void;
-  user: IUser;
-  cart: IOrderLines;
-  isFetching: boolean;
-  message: string;
-  fjoldi: any;
-  total: any;
-  voruNR: any;
+interface IAddToCartProps {
+    dispatch: (func: any) => void;
+    isFetching: boolean;
 }
 
-export function AddToCart(props: ICartProps, state: IAddToCartState) {
-  let { fjoldi, total } = props;
+export function AddToCart(state: IAddToCartState, props: IAddToCartProps) {
+    let {
+        fjoldi,
+        onChange,
+        voruNR,
+    } = state;
 
-  function handleInputChange(e: React.FormEvent<HTMLInputElement>): void {
-    const { value } = e.currentTarget;
-    console.log(value);
-    fjoldi = value;
-  }
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+        e.preventDefault();
 
-  function handleEyda(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-    const { dispatch } = props;
-    const { voruNR } = props;
-    dispatch(deleteCartID(voruNR));
-  }
+        const { dispatch } = props;
+        console.log(dispatch)
 
-  return (
-    <React.Fragment>
-      <div className="addtocart__item__row">
-        <Field
-          name="fjoldi"
-          value={fjoldi}
-          type="number"
-          label="Fjöldi:"
-          onChange={handleInputChange}
-        />
-      </div>
-      <Button>Uppfæra</Button>
-      <form className="form__default" onSubmit={handleEyda}>
-        <div className="addtocart__item__colum">
-          <h3>Samtals: {total} kr.-</h3>
-          <Button>Eyða línu</Button>
-        </div>
-      </form>
-    </React.Fragment>
-  );
+        dispatch(postCart(voruNR, fjoldi));
+    }
+
+    return (
+        <React.Fragment>
+            <form className="form__default" /*onSubmit={handleSubmit}*/>
+                <Field
+                    name="fjoldi"
+                    value={fjoldi}
+                    type="number"
+                    label="Fjöldi"
+                    onChange={onChange} />
+                <div className="butt__container">
+                    <Button>Bæta við körfu</Button>
+                </div>
+            </form>
+        </React.Fragment>
+    );
 }
 
-const mapStateToProps = (state: any) => {
-  return {
+const mapStateToProps = (state: any) => ({
     isFetching: state.getCart.isFetching,
-    cart: state.getCart.cart,
-    user: state.auth.user,
-    message: state.getCart.message,
-  }
-}
+});
 
 export default connect(mapStateToProps)(AddToCart);

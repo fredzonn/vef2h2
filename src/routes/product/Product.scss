@@ -9,6 +9,10 @@
     display: flex;
 }
 
+.product__item input {
+    width: 40px;
+}
+
 .desc {
     display: flex;
     flex-direction: column;

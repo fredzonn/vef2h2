@@ -1,4 +1,4 @@
-import { get, deleteID } from '../api/index';
+import { get, deleteID, post } from '../api/index';
 
 export const CART_REQUEST = 'CART_REQUEST';
 export const CART_SUCCESS = 'CART_SUCCESS';
@@ -65,6 +65,31 @@ export const deleteCartID = (id) =>
         }
         if (cart.status !== 200) {
             dispatch(cartError('Ekkert í körfu'));
+        }
+
+        dispatch(receiveCart(cart));
+
+    }
+
+export const postCart = (product, quantity) =>
+    async (dispatch) => {
+        dispatch(requestCart());
+
+        let endpoint = 'cart/';
+        let cart;
+        try {
+            cart = await post(endpoint, { product, quantity });
+        } catch (e) {
+            dispatch(cartError(e));
+        }
+        console.log(cart.status);
+        console.log('result', cart.result);
+        if (cart.status !== 201) {
+            const { errors } = cart.result;
+            if (errors) {
+                console.log('error her', errors)
+                dispatch(cartError(errors));
+            }
         }
 
         dispatch(receiveCart(cart));

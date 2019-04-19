@@ -11,7 +11,11 @@ interface IHeaderProp {
   user?: IUser;
 }
 
-export function Home(props: IHeaderProp) {
+interface IHeaderState {
+  user: IUser;
+}
+
+export function Home(props: IHeaderProp, state: IHeaderState) {
 
   function logout(e: React.FormEvent<HTMLLinkElement>): void {
     const { dispatch } = props;
