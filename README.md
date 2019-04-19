@@ -2,6 +2,24 @@
 
 Útfæra skal framenda ofan á vefþjónustur úr hópverkefni 1.
 
+##Höfundar
+
+* Alexander Þór Hafþórsson - athh15@hi.is - athh15
+* Emil Alfreðsson - ema102@hi.is - fredzonn
+* Þorsteinn Kristinn Ingólfsson - thi35@hi.is - steini96
+
+##Uppsetning
+Til þess að keyra þarf að keyra þessar skipanir
+1. `git clone https://github.com/fredzonn/vef2h2.git`
+2. `cd vef2h2`
+3. `npm install`
+4. `npm run start`
+
+##Innskráning sem admin eða venjulegur notandi
+
+* Sem stjórnandi username = `admin`, password = `hóp1-2019-admin`
+* Ekki stjórnandi username = `alex`, password = `12341234`
+
 ## Virkni
 
 Hægt er að útfæra á móti þeirri lausn sem hópur vann í hópverkefni 1, eða nýta [sýnilausn á hópverkefni 1](https://github.com/vefforritun/vef2-2019-h1-synilausn) sem [keyrir á Heroku](https://vefforritun2-2019-h1-synilausn.herokuapp.com/).
