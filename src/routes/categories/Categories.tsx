@@ -1,7 +1,7 @@
-import { getProduct, getCategories, getCategor } from '../../api/index';
-import React, { Fragment, useState, useEffect } from 'react';
+import { getCategories } from '../../api/index';
+import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { IProduct, ICategory } from '../../api/types';
+import { ICategory } from '../../api/types';
 
 export default function CategoriesRoute() {
 
