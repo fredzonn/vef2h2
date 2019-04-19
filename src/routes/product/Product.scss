@@ -1,5 +1,54 @@
 @import '../../config.scss';
 
-.productDetails {
+.more {
+   margin-top: 2rem; 
+}
 
+.product__item {
+    margin-top: 2rem;
+    display: flex;
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 1rem;
+    max-width: 50rem;
+}
+
+.Pdesc {
+    max-width: 450px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Pdesc > .left > h1 {
+    font-size: 1rem;
+}
+
+.Pdesc > h2 {
+    font-size: 2rem;
+}
+
+.info {
+    margin-top: 1rem;
+}
+
+.Pcategory {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.Pproduct {
+    margin: 0.5rem;
+}
+
+.desc > h1 {
+    font-size: 1.5rem;
+}
+
+.desc > p {
+    margin-top: 1rem;
 }

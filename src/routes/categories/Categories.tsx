@@ -1,7 +1,9 @@
-import { getProduct, getCategories, getCategor } from '../../api/index';
-import React, { Fragment, useState, useEffect } from 'react';
+import { getCategories } from '../../api/index';
+import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { IProduct, ICategory } from '../../api/types';
+import './categories.scss';
+
 
 export default function CategoriesRoute() {
 
@@ -53,7 +55,7 @@ export default function CategoriesRoute() {
     )}
     {!loading && (
       <div className="haldari">
-        <h2>Skoðaðu vöruflokkana okkar</h2>
+        <h2 className = "look">Skoðaðu vöruflokkana okkar</h2>
         {fall(categories)}
       </div>
     )}
