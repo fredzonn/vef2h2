@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 
 export default function Category(/*{props} : { props: any}*/props: any) {
   const [categories, setCategories] = useState();
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   var parts = props.location.pathname.split('/');
   var id = parts.pop();
@@ -13,7 +14,7 @@ export default function Category(/*{props} : { props: any}*/props: any) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const result = await getCategory(id);
+      const result = await getCategory(id,"");
       console.log("þetta er final countdown: ",result);
       setCategories(result);
       setLoading(false);
@@ -64,6 +65,37 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     }
   }
 
+  async function onClick() {
+    console.log(search);
+    setLoading(true);
+    const result = await getCategory(id,search);
+    console.log("þetta er final countdown: ",result);
+    setCategories(result);
+    setLoading(false);
+    return //location.href = "categories/"+index;
+  }
+
+  function onChange(value: string) {
+    console.log(value);
+  }
+
+/*  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    // No longer need to cast to any - hooray for react!
+    this.setState({temperature: e.target.value});
+  }*/
+
+  function change(event: React.FormEvent<HTMLInputElement>) {
+        // No longer need to cast to any - hooray for react!
+        var safeSearchTypeValue: string = event.currentTarget.value;
+        setSearch(safeSearchTypeValue);
+        console.log(safeSearchTypeValue,search); // in chrome => B
+
+        /*this.setState({
+            selectedValue: safeSearchTypeValue
+        });*/
+        console.log(search);
+    }
+
   return (
   <div className="container">
   <Helmet title="Flokkar" />
@@ -73,6 +105,8 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     {!loading && (
       <div className="haldari">
         <h2>Skoðaðu vöruflokkana okkar</h2>
+        <input className={"v"} /*type={type}*/ onChange={e => change(e)}/>
+        <button className={"v"} onClick={onClick}>Leita</button>
         {fall(categories)}
       </div>
     )}
