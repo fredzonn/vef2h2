@@ -1,7 +1,9 @@
 import { getCategories } from '../../api/index';
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
-import { ICategory } from '../../api/types';
+import { IProduct, ICategory } from '../../api/types';
+import './categories.scss';
+
 
 export default function CategoriesRoute() {
 

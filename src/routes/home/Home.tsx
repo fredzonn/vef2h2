@@ -52,7 +52,6 @@ export default function Home() {
       return '';
     }
   }
-
   return (
     <div className="Hcontainer">
     <Helmet title="Vörur" />
@@ -72,4 +71,3 @@ export default function Home() {
   
   
   }
-  
