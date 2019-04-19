@@ -15,6 +15,7 @@ function receiveOrder(order) {
     return {
         type: ORDER_SUCCESS,
         isFetching: false,
+        success: true,
         order,
         message: null,
     };
@@ -41,6 +42,7 @@ export const getOrder = () =>
             dispatch(orderError(e));
         }
         console.log(order.status);
+        console.log(order.result);
         if (order.status !== 200) {
             dispatch(orderError('Ekkert í körfu'));
         }
@@ -63,7 +65,7 @@ export const postOrder = (name, address, cart) =>
         }
         console.log(order.status);
         console.log('result', order.result);
-        if (order.status !== 200) {
+        if (order.status !== 201) {
             const { errors } = order.result;
             if (errors) {
                 console.log('error her', errors)
