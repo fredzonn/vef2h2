@@ -3,6 +3,7 @@
 .Hproducts {
     display: flex;
     flex-wrap: wrap;
+    cursor: pointer;
 }
 
 .Hproduct {
@@ -14,6 +15,21 @@
     max-width: 450px;
     display: flex;
     justify-content: space-between;
+}
+
+.buttonCat {
+    font-family: "Open Sans", helvetica, arial, sans-serif;
+    min-width: 10rem;
+    min-height: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.buttonCat:hover {
+    filter:invert(100%)
 }
 
 .Hdesc > h1 {
