@@ -2,3 +2,32 @@
 
 .home {
 }
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product {
+    margin: 0.5rem;
+    margin-top: 2rem;
+}
+
+.desc {
+    max-width: 450px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.desc > h1 {
+    font-size: 1rem;
+}
+
+.desc > h2 {
+    font-size: 2rem;
+}
+
+.title > h2 {
+    margin-top: 1rem;
+}
+
