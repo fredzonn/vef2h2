@@ -2,20 +2,20 @@
 
 Útfæra skal framenda ofan á vefþjónustur úr hópverkefni 1.
 
-##Höfundar
+## Höfundar
 
 * Alexander Þór Hafþórsson - athh15@hi.is - athh15
 * Emil Alfreðsson - ema102@hi.is - fredzonn
 * Þorsteinn Kristinn Ingólfsson - thi35@hi.is - steini96
 
-##Uppsetning
+## Uppsetning
 Til þess að keyra þarf að keyra þessar skipanir
 1. `git clone https://github.com/fredzonn/vef2h2.git`
 2. `cd vef2h2`
 3. `npm install`
 4. `npm run start`
 
-##Innskráning sem admin eða venjulegur notandi
+## Innskráning sem admin eða venjulegur notandi
 
 * Sem stjórnandi username = `admin`, password = `hóp1-2019-admin`
 * Ekki stjórnandi username = `alex`, password = `12341234`
