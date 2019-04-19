@@ -1,4 +1,4 @@
-import { IProduct, ICategory } from './types';
+import { IProduct, ICategory,  IOrders } from './types';
 
 // Sækja slóð á API úr en
 const baseurl:string | undefined = process.env.REACT_APP_API_URL;
@@ -23,21 +23,7 @@ async function getProduct(id: number | string) : Promise<IProduct> {
 
   return product;
 }
-async function getCategor(/*id: number | string |undefined*/) /*: Promise<ICategory[]>*/ {
-  const url = new URL('/categories', baseurl);
-  const response = await fetch(url.href)
-  const data = await response.json();
-  //console.log("data úr index.ts: ",data.items);
 
-  //const prods: ICategory[] = await response.json();
-  //console.log("prod er: ", data.items);
-  /*const product: ICategory = {
-    id: data.items[1].id,
-    title: data.items[1].title,
-  };
-  console.log("product: ", product);*/
-  return data;
-}
 
 /*async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]> {
   // todo sækja vöru
@@ -131,83 +117,38 @@ async function getProducts(offset:Number, limit:Number) : Promise<IProduct[]> {
   return new Promise((resolve) => resolve(prods))
 }
 
-async function getCategor(/*id: number | string |undefined*/) /*: Promise<ICategory[]>*/ {
-  const url = new URL('/categories', baseurl);
-  const response = await fetch(url.href)
-  const data = await response.json();
-  //console.log("data úr index.ts: ",data.items);
-
-  //const prods: ICategory[] = await response.json();
-  //console.log("prod er: ", data.items);
-  /*const product: ICategory = {
-    id: data.items[1].id,
-    title: data.items[1].title,
-  };
-  console.log("product: ", product);*/
-  return data;
-}
-
-/*async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]> {
+async function getOrders(category: Number, search: string, offset: Number, limit: Number) : Promise<IOrders[]> {
   // todo sækja vöru
-  const url = new URL('/categories/'+1, baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
-  const response = await fetch(url.href);
+  console.log("ÞETTA ER getOrders: ",category)
+  const url = new URL('/orders', baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
+  const response = await fetch(url.href); // ?offset=${offset}&limit=${limit}
   const JSONgogn = response.json();
-  const arr:ICategory[] = [];
-
-  const cats = JSONgogn.then(function(data){
-    cats.forEach(function(element: { id: number; title: string; }) {
-      const category: ICategory = {
-        id: element.id,
-        title: element.title,
-      };
-      arr.push(category);
-    });
-    return arr;
-  });
-  return new Promise((resolve) => resolve(cats))
-}*/
-
-async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]> {
-  // todo sækja vöru
-  const url = new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
-  const response = await fetch(url.href);
-  const JSONgogn = response.json();
-  const arr:ICategory[] = [];
-
-  const cats = JSONgogn.then(function(data){
-    console.log("datað er þetta: ",data);
-    data.items.forEach(function(element: { id: number; title: string; }) {
-      const category: ICategory = {
-        id: element.id,
-        title: element.title,
-      };
-      arr.push(category);
-    });
-    return arr;
-  });
-  return new Promise((resolve) => resolve(cats))
-}
-
-async function getCategory(category:String) : Promise<ICategory[]> {
-  // todo sækja vöru
-  const url = new URL('/products/'+'?category'+"'"+category+"'", baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
-  const response = await fetch(url.href);
-  const JSONgogn = response.json();
-  const arr:ICategory[] = [];
+  const arr: IOrders[] = [];
 
   const cats = JSONgogn.then(function(data){
     console.log("gögn er þetta: ",data);
-    data.items.forEach(function(element: { id: number; title: string; }) {
-      const category: ICategory = {
+    data.items.forEach(function(element: { id: number; name: string/*; image: string; price:number; category_id: number; category_title: string*/ }) {
+      const product: IOrders = {
         id: element.id,
-        title: element.title,
+        name: element.name,
+        address: "",
+        //order_created: ,
+        order_submitted: true,
+        user: {
+          id: 0,
+          username: "string;",
+          email: "string;",
+          password: "string;",
+          admin: false,
+        },
       };
-      arr.push(category);
+      arr.push(product);
     });
     return arr;
   });
   return new Promise((resolve) => resolve(cats))
 }
+
 
 interface options {
   body: any;
@@ -242,8 +183,8 @@ export {
   getProduct,
   getProducts,
   getCategories,
-  getCategor,
   getCategory,
+  getOrders,
   post,
 
 };

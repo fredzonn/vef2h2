@@ -21,14 +21,14 @@ export interface IUser{
   password: string;
   admin: boolean;
   created?: Date;
-  updated?: Date; 
+  updated?: Date;
 }
 
 export interface IOrders{
   id: number;
   name: string;
   address: string;
-  order_created: Date;
+  order_created?: Date;//? á ekki að vera 
   order_submitted: boolean;
   user: IUser;
   created?: Date;

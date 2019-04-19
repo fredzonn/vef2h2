@@ -1,4 +1,4 @@
-import { getProduct, getCategories, getCategor } from '../../api/index';
+import { getProduct, getCategories } from '../../api/index';
 import React, { Fragment, useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { IProduct, ICategory } from '../../api/types';
