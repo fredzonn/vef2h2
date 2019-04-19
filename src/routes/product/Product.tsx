@@ -75,6 +75,10 @@ export function Product(props: any, state: IProductState) {
     }
   }
 
+  async function onClick(index: Number) {
+    return location.href = ""+index;
+  }
+
   function fall2(categories: IProduct[] | undefined) {
     console.log(categories)
     if (categories !== undefined) {
@@ -83,16 +87,16 @@ export function Product(props: any, state: IProductState) {
         <div className="Pcategory">
 
           {categories.map((data, i) => (
-            <div key={i} className="Pproduct">
+            <div key={i} className="Pproduct" onClick={() => onClick(data.id)}>
 
-              <img className="img-responsive" width="450" height="300" src={data.image} alt="logo" />
-              <div className="Pdesc">
-                <div className="left">
-                  <h1>{data.title}</h1>
-                  <p>{data.category.title}</p>
+                <img className="img-responsive" width="450" height="300" src={data.image} alt="logo"/>
+                <div className = "Pdesc">
+                  <div className = "left">
+                    <h1>{data.title}</h1>
+                    <p>{data.category.title}</p>
+                  </div>
+                  <h2>{data.price} kr.-</h2>
                 </div>
-                <h2>{data.price} kr.-</h2>
-              </div>
 
             </div>
           ))}
