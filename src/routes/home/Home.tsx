@@ -28,6 +28,14 @@ export default function Home() {
     return location.href = "product/" + index;
   }
 
+  async function onClick2(index: Number) {
+    return location.href = "Categories/" + index;
+  }
+
+  async function onClick3() {
+    return location.href = "Categories";
+  }
+
   function fall(product: IProduct[] | undefined) {
     if (product !== undefined) {
       return (
@@ -62,14 +70,14 @@ export default function Home() {
 
       <div className = "holder">
 
-      <button className = "buttonCat">Skoða alla flokka</button>
+      <button className = "buttonCat" onClick={() => onClick3()}>Skoða alla flokka</button>
 
         <div className="categories">
 
           {categories.map((data, i) => (
             <div key={i} className="category">
 
-              <div className="categoryinn" key={data.id || i} onClick={() => onClick(data.id)}>
+              <div className="categoryinn" key={data.id || i} onClick={() => onClick2(data.id)}>
                 <p>{data.title}</p>
               </div>
 

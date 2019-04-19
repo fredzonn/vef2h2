@@ -43,6 +43,10 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     <p>category</p>
   )*/
 
+  async function onClick4(index: Number) {
+    return location.href = location.origin+"/product/"+index;
+  }
+
   function fall(categories: IProduct[] | undefined) {
     if (categories !== undefined) {
       return (
@@ -50,7 +54,7 @@ export default function Category(/*{props} : { props: any}*/props: any) {
         <div className="products">
 
           {categories.map((data, i) => (
-            <div key={i} className="product">
+            <div key={i} className="product" onClick={() => onClick4(data.id)}>
 
                 <img className="img-responsive" src={data.image} alt="logo"/>
                 <p>{data.title}</p>
