@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_LOGOUT } from '../actions/auth';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN_LOGOUT, AUTHENTICATE, AUTHENTICATE_REQUEST } from '../actions/auth';
 
 // Ef það er notandi í localStorage erum við með innskráðan notanda
 // hér gætum við líka sótt token
@@ -39,6 +39,22 @@ export default (state = initialState, action) => {
                 isFetching: action.isFetching,
                 isAuthenticated: action.isAuthenticated,
                 user: action.user,
+            };
+        case AUTHENTICATE:
+            return {
+                ...state,
+                isAuthenticated: action.isAuthenticated,
+                isFetching: action.isFetching,
+                user: action.user,
+                message: action.message,
+            };
+        case AUTHENTICATE_REQUEST:
+            return {
+                ...state,
+                isAuthenticated: action.isAuthenticated,
+                isFetching: action.isFetching,
+                user: action.user,
+                message: action.message,
             };
         default:
             return state;

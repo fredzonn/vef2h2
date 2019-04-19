@@ -4,7 +4,7 @@ import './Field.css';
 interface IFieldProps {
     label: string;
     name: string;
-    value?: string;
+    value?: any;
     type: string;
     onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
     placeHolder?: string;

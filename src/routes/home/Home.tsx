@@ -13,7 +13,7 @@ export default function Products() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const result = await getProducts(0,6);
+      const result = await getProducts(0, 6);
       setProducts(result);
       setLoading(false);
     }
@@ -35,11 +35,11 @@ export default function Products() {
 
               <div className="product__item" key={data.id || i} onClick={() => onClick(data.id)}>
                 <img src={data.image} width="450" height="300" alt="Image"></img>
-                  <div className = "desc">
-                    <h1>{data.title}</h1>
-                    <p>{data.category}</p>
-                    <h2>{data.price} kr.-</h2>
-                  </div>
+                <div className="desc">
+                  <h1>{data.title}</h1>
+                  <p>{data.category}</p>
+                  <h2>{data.price} kr.-</h2>
+                </div>
               </div>
 
             </div>
@@ -47,7 +47,7 @@ export default function Products() {
 
         </div>
 
-      );;
+      );
     } else {
       return '';
     }
@@ -55,9 +55,9 @@ export default function Products() {
 
   return (
     <div className="container">
-    <Helmet title="Vörur" />
+      <Helmet title="Vörur" />
       {loading && (
-          <h2 className="loading">Hleð gögnum...</h2>
+        <h2 className="loading">Hleð gögnum...</h2>
       )}
       {!loading && (
         <div className="haldari">
@@ -69,7 +69,6 @@ export default function Products() {
       )}
     </div>
   );
-  
-  
-  }
-  
+
+
+}

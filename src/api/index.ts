@@ -1,15 +1,16 @@
 import { IProduct, ICategory } from './types';
 import { number } from 'prop-types';
+import { async } from 'q';
 
 // Sækja slóð á API úr env
-const baseurl:string | undefined = process.env.REACT_APP_API_URL;
+const baseurl: string | undefined = process.env.REACT_APP_API_URL;
 console.log(baseurl);
 
-async function getProduct(id: number | string) : Promise<IProduct> {
-  const url = new URL('/products/'+id, baseurl);
+async function getProduct(id: number | string): Promise<IProduct> {
+  const url = new URL('/products/' + id, baseurl);
   const response = await fetch(url.href)
   const data = await response.json();
-  console.log("data úr index.ts: ",data);
+  console.log("data úr index.ts: ", data);
 
   const product: IProduct = {
     category: {
@@ -25,15 +26,15 @@ async function getProduct(id: number | string) : Promise<IProduct> {
   return product;
 }
 
-async function getProducts(offset:Number, limit:Number) : Promise<IProduct[]> {
+async function getProducts(offset: Number, limit: Number): Promise<IProduct[]> {
   const url = new URL('/products/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
   const response = await fetch(url.href);
   const JSONgogn = response.json();
-  const arr:IProduct[] = [];
+  const arr: IProduct[] = [];
 
-  const prods = JSONgogn.then(function(data){
-    console.log("datað er þetta: ",data);
-    data.items.forEach(function(element: { id: number; title: string; price: number; image: string; category: ICategory; }) {
+  const prods = JSONgogn.then(function (data) {
+    console.log("datað er þetta: ", data);
+    data.items.forEach(function (element: { id: number; title: string; price: number; image: string; category: ICategory; }) {
       const products: IProduct = {
         id: element.id,
         title: element.title,
@@ -84,16 +85,16 @@ async function getCategor(/*id: number | string |undefined*/) /*: Promise<ICateg
   return new Promise((resolve) => resolve(cats))
 }*/
 
-async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]> {
+async function getCategories(offset: Number, limit: Number): Promise<ICategory[]> {
   // todo sækja vöru
   const url = new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
   const response = await fetch(url.href);
   const JSONgogn = response.json();
-  const arr:ICategory[] = [];
+  const arr: ICategory[] = [];
 
-  const cats = JSONgogn.then(function(data){
-    console.log("datað er þetta: ",data);
-    data.items.forEach(function(element: { id: number; title: string; }) {
+  const cats = JSONgogn.then(function (data) {
+    console.log("datað er þetta: ", data);
+    data.items.forEach(function (element: { id: number; title: string; }) {
       const category: ICategory = {
         id: element.id,
         title: element.title,
@@ -105,16 +106,16 @@ async function getCategories(offset:Number, limit:Number) : Promise<ICategory[]>
   return new Promise((resolve) => resolve(cats))
 }
 
-async function getCategory(category:String) : Promise<ICategory[]> {
+async function getCategory(category: String): Promise<ICategory[]> {
   // todo sækja vöru
-  const url = new URL('/products/'+'?category'+"'"+category+"'", baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
+  const url = new URL('/products/' + '?category' + "'" + category + "'", baseurl);//new URL('/categories/', baseurl);//(/categories?offset=${offset}&limit=${limit},baseurl);
   const response = await fetch(url.href);
   const JSONgogn = response.json();
-  const arr:ICategory[] = [];
+  const arr: ICategory[] = [];
 
-  const cats = JSONgogn.then(function(data){
-    console.log("gögn er þetta: ",data);
-    data.items.forEach(function(element: { id: number; title: string; }) {
+  const cats = JSONgogn.then(function (data) {
+    console.log("gögn er þetta: ", data);
+    data.items.forEach(function (element: { id: number; title: string; }) {
       const category: ICategory = {
         id: element.id,
         title: element.title,
@@ -127,9 +128,9 @@ async function getCategory(category:String) : Promise<ICategory[]> {
 }
 
 interface options {
-  body: any;
+  body?: any;
   headers: any;
-  method: string;
+  method?: string;
 }
 
 async function post(endpoint: string, data: any) {
@@ -155,6 +156,45 @@ async function post(endpoint: string, data: any) {
   return { result, status: response.status };
 }
 
+async function get(endpoint: string) {
+
+  const token = window.localStorage.getItem('token');
+
+  const url = `${baseurl}${endpoint}`;
+
+  const options: options = {
+    headers: {},
+  };
+
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(url, options);
+  const result = await response.json();
+
+  return { result, status: response.status };
+}
+
+async function deleteID(endpoint: string) {
+  const url = `${baseurl}${endpoint}`;
+
+  const options: options = {
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'DELETE',
+  }
+  const token = window.localStorage.getItem('token');
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  await fetch(url, options);
+
+}
+
+
 export {
   getProduct,
   getProducts,
@@ -162,5 +202,6 @@ export {
   getCategor,
   getCategory,
   post,
-
+  get,
+  deleteID
 };

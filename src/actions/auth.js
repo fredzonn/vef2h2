@@ -6,6 +6,9 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGIN_LOGOUT = 'LOGIN_LOGOUT';
 
+export const AUTHENTICATE_REQUEST = 'AUTHENTICATE_REQUEST';
+export const AUTHENTICATE = 'AUTHENTICATE';
+
 function requestLogin() {
     return {
         type: LOGIN_REQUEST,
@@ -40,6 +43,34 @@ function logout() {
         isAuthenticated: false,
         user: null,
     };
+}
+
+function authenticateRequest() {
+    return {
+        type: AUTHENTICATE_REQUEST,
+        isAuthenticated: false,
+        isFetching: true,
+        user: null,
+        error: null,
+    }
+}
+
+function authenticate(user, isAuthenticated) {
+    return {
+        type: AUTHENTICATE,
+        isAuthenticated,
+        isFetching: false,
+        user,
+        error: null,
+    }
+}
+
+export const authenticateUser = (user) => {
+    return (dispatch) => {
+        dispatch(authenticateRequest());
+        const isAuthenticated = user ? true : false;
+        dispatch(authenticate(user, isAuthenticated));
+    }
 }
 
 // Thunk!
