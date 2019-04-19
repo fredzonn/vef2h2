@@ -3,6 +3,8 @@ import { getProduct } from '../../api/index';
 import { IProduct } from '../../api/types';
 import Helmet from 'react-helmet';
 
+import './Product.scss';
+
 export default function Product(/*{props} : { props: any}*/props: any) {
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState(false);
@@ -21,25 +23,27 @@ export default function Product(/*{props} : { props: any}*/props: any) {
     fetchData();
   }, []);
 
-  function fall(product: IProduct[] | undefined) {
+  function fall(product: IProduct | undefined) {
     if (product !== undefined) {
       return (
 
         <div className="product">
 
-          {product.map((data, i) => (
-            <div key={i} className="product__item">
+            <div className="product__item">
 
-                <img className="img-responsive" src={data.image} alt="logo"/>
-                <p>{data.title}</p>
-                <div>{data.category.title}</div>
-                <div>{data.price}</div>
-
-
+                <img className="img-responsive" src={product.image} alt="logo"/>
+                <div className = "desc">
+                  <h1>{product.title}</h1>
+                    <div className = "info">
+                      <p>Flokkur: {product.category.title}</p>
+                      <p>Verð: {product.price} kr.-</p>
+                    </div>
+                  <p>{product.description}</p>
+                </div>
+              </div>
+              <h2>Meira úr {product.category.title}</h2>
             </div>
-          ))}
-
-        </div>
+            
 
       );
     } else {
@@ -55,7 +59,6 @@ export default function Product(/*{props} : { props: any}*/props: any) {
     )}
     {!loading && (
       <div className="haldari">
-        <h2>Skoðaðu vöruflokkana okkar</h2>
         {fall(product)}
       </div>
     )}

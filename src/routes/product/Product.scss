@@ -3,3 +3,27 @@
 .productDetails {
 
 }
+
+.product__item {
+    display: flex;
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 1rem;
+    max-width: 50rem;
+}
+
+.info {
+    margin-top: 1rem;
+}
+
+.desc > h1 {
+    font-size: 1.5rem;
+}
+
+.desc > p {
+    margin-top: 1rem;
+}
