@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { getCategory } from '../../api/index';
 import { IProduct, ICategory } from '../../api/types';
 import Helmet from 'react-helmet';
+import '../home/Home.scss';
 
 import './Category.scss';
 
-export default function Category(/*{props} : { props: any}*/props: any) {
+export default function Category(props: any) {
+
   const [categories, setCategories] = useState();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,12 +17,10 @@ export default function Category(/*{props} : { props: any}*/props: any) {
   var parts = props.location.pathname.split('/');
   var id = parts.pop();
   id = parseInt(id);
-  console.log("þetta er vitlaust?: ",id);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const result = await getCategory(id, "", offset, 12);
-      console.log("þetta er final countdown: ",result[1].category.title);
       setFyrirsogn(result[1].category.title);
       setCategories(result);
       setLoading(false);
@@ -87,18 +87,15 @@ export default function Category(/*{props} : { props: any}*/props: any) {
   }
 
   async function onClick() {
-    console.log("search: ",search);
     setLoading(true);
     const result = await getCategory(id,search,offset, 12);
-    console.log("þetta er final countdown: ",result);
     setCategories(result);
     setLoading(false);
-    return //location.href = "categories/"+index;
+    return
   }
 
   async function onClick2() {
     setOffset(offset+12);
-    console.log("all set: ",offset);
     setLoading(true);
     const result = await getCategory(id,search, offset+12, 12);
     if(result.length===0){
@@ -106,15 +103,13 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     }else{
       setErEndir(false);
     }
-    console.log("þetta er final countdown: ",result.length);
     setCategories(result);
     setLoading(false);
-    return //location.href = "categories/"+index;
+    return
   }
 
   async function onClick3() {
     setOffset(offset-12);
-    console.log("all set: ",offset);
     setLoading(true);
     const result = await getCategory(id,search, offset-12, 12);
     if(result.length===0){
@@ -122,36 +117,33 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     }else{
       setErEndir(false);
     }
-    console.log("þetta er final countdown: ",result.length);
     setCategories(result);
     setLoading(false);
-    return //location.href = "categories/"+index;
+    return
   }
 
   function onChange(value: string) {
     console.log(value);
   }
 
-
-
   function change(event: React.FormEvent<HTMLInputElement>) {
         // No longer need to cast to any - hooray for react!
         var safeSearchTypeValue: string = event.currentTarget.value;
         setSearch(safeSearchTypeValue);
-        console.log(safeSearchTypeValue,search); 
 
-    
-        console.log(search);
     }
 
   return (
-  <div className="container">
+  <div className="Hcontainer">
   <Helmet title="Flokkar" />
     {loading && (
         <h2 className="loading">Hleð gögnum...</h2>
     )}
     {!loading && (
+
+      
       <div className="Phaldari">
+
         <h2>{fyrirsogn}</h2>
         Leita: <input className={"v"} /*type={type}*/ onChange={e => change(e)}/>
         <button className={"v"} onClick={onClick}>Leita</button>
@@ -163,5 +155,3 @@ export default function Category(/*{props} : { props: any}*/props: any) {
 );
 
 }
-
-
