@@ -18,14 +18,19 @@
 }
 
 .buttonCat {
-    font-family: "Open Sans", helvetica, arial, sans-serif;
-    min-width: 10rem;
-    min-height: 2rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    background-color: black;
-    color: white;
+    max-width: 15rem;
+    margin-left: 0.5rem;
+    padding: 5px 10px;
+    font-family: "Open Sans", helvetica, arial, sans-serif;
+    font-size: 1rem;
+    color: #eee;
+    text-align: center;
     cursor: pointer;
+    background-color: #222;
+    border: 1px solid #222;
+    border-radius: 4px;
 }
 
 .buttonCat:hover {

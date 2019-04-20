@@ -4,7 +4,10 @@ import { IProduct, ICategory } from '../../api/types';
 import Helmet from 'react-helmet';
 import '../home/Home.scss';
 
+import './Category.scss';
+
 export default function Category(props: any) {
+
   const [categories, setCategories] = useState();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,24 +36,23 @@ export default function Category(props: any) {
     if (categories !== undefined) {
       return (
 
-        <div className="Hproducts">
+        <div className="Pcategory">
 
           {categories.map((data, i) => (
-            <div key={i} className="Hproduct">
-              <div className="Hproduct__item" key={data.id || i} onClick={() => onClick4(data.id)}>
-                <img className="img-responsive" src={data.image} alt="logo"/>
-                <div className = "Hdesc">
-                  <p>{data.title}</p>
-                  <div>{data.category.title}</div>
-                  <div>{data.price}</div>
+            <div key={i} className="Pproduct" onClick={() => onClick4(data.id)}>
+            
+              <img className="img-responsive" width="450" height="300" src={data.image} alt="logo"/>
+                <div className = "Pdesc">
+                  <div className = "left">
+                    <h1>{data.title}</h1>
+                    <p>{data.category.title}</p>
+                  </div>
+                  <h2>{data.price} kr.-</h2>
                 </div>
-              </div>
             </div>
           ))}
-
         </div>
-
-      );;
+      );
     } else {
       return '';
     }
@@ -128,6 +130,7 @@ export default function Category(props: any) {
         // No longer need to cast to any - hooray for react!
         var safeSearchTypeValue: string = event.currentTarget.value;
         setSearch(safeSearchTypeValue);
+
     }
 
   return (
@@ -137,9 +140,12 @@ export default function Category(props: any) {
         <h2 className="loading">Hleð gögnum...</h2>
     )}
     {!loading && (
-      <div className="Hhaldari">
+
+      
+      <div className="Phaldari">
+
         <h2>{fyrirsogn}</h2>
-        <input className={"v"} /*type={type}*/ onChange={e => change(e)}/>
+        Leita: <input className={"v"} /*type={type}*/ onChange={e => change(e)}/>
         <button className={"v"} onClick={onClick}>Leita</button>
         {fall(categories)}
         {fall2()}
