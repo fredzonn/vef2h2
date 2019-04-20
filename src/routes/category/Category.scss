@@ -1,0 +1,56 @@
+
+.Phaldari{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.Pcategory {
+    margin-top: 1rem;
+}
+
+.Pproduct {
+    cursor: pointer;
+}
+
+.paging {
+    display: flex;
+    justify-content: space-between;
+    max-width: 20rem;
+}
+
+.Phaldari > h2 {
+    margin-bottom: 0.5rem;
+}
+
+.Phaldari > input {
+    min-height: 1.5rem;
+}
+
+.Phaldari > button {
+    max-width: 15rem;
+    margin-left: 0.5rem;
+    padding: 5px 10px;
+    font-family: "Open Sans", helvetica, arial, sans-serif;
+    font-size: 1rem;
+    color: #eee;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+    border: 1px solid #222;
+    border-radius: 4px;
+}
+
+
+.paging > button {
+    max-width: 15rem;
+    margin-left: 0.5rem;
+    padding: 5px 10px;
+    font-family: "Open Sans", helvetica, arial, sans-serif;
+    font-size: 1rem;
+    color: #eee;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+    border: 1px solid #222;
+    border-radius: 4px;
+}

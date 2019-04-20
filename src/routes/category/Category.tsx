@@ -3,6 +3,8 @@ import { getCategory } from '../../api/index';
 import { IProduct, ICategory } from '../../api/types';
 import Helmet from 'react-helmet';
 
+import './Category.scss';
+
 export default function Category(/*{props} : { props: any}*/props: any) {
   const [categories, setCategories] = useState();
   const [search, setSearch] = useState("");
@@ -26,23 +28,6 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     fetchData();
   }, []);
 
-  //const { id } = props;
-
-  //text = 'Something -that - has- dashes - World';
-  /*var parts = props.location.pathname.split('/');
-  var id = parts.pop();
-  console.log("balsam: ",parts,id);*/
-
-  /*var id = props.location.pathname[props.location.pathname.length -1];
-  id = parseInt(id);
-  console.log(props.location.pathname, id);
-  console.log("true?: ",id===9);*/
-  //Category.getInitialProps();
-
-  /*return (
-    <p>category</p>
-  )*/
-
   async function onClick4(index: Number) {
     return location.href = location.origin+"/product/"+index;
   }
@@ -51,22 +36,23 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     if (categories !== undefined) {
       return (
 
-        <div className="products">
+        <div className="Pcategory">
 
           {categories.map((data, i) => (
-            <div key={i} className="product" onClick={() => onClick4(data.id)}>
-
-                <img className="img-responsive" src={data.image} alt="logo"/>
-                <p>{data.title}</p>
-                <div>{data.category.title}</div>
-                <div>{data.price}</div>
-
+            <div key={i} className="Pproduct" onClick={() => onClick4(data.id)}>
+            
+              <img className="img-responsive" width="450" height="300" src={data.image} alt="logo"/>
+                <div className = "Pdesc">
+                  <div className = "left">
+                    <h1>{data.title}</h1>
+                    <p>{data.category.title}</p>
+                  </div>
+                  <h2>{data.price} kr.-</h2>
+                </div>
             </div>
           ))}
-
         </div>
-
-      );;
+      );
     } else {
       return '';
     }
@@ -146,20 +132,15 @@ export default function Category(/*{props} : { props: any}*/props: any) {
     console.log(value);
   }
 
-/*  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    // No longer need to cast to any - hooray for react!
-    this.setState({temperature: e.target.value});
-  }*/
+
 
   function change(event: React.FormEvent<HTMLInputElement>) {
         // No longer need to cast to any - hooray for react!
         var safeSearchTypeValue: string = event.currentTarget.value;
         setSearch(safeSearchTypeValue);
-        console.log(safeSearchTypeValue,search); // in chrome => B
+        console.log(safeSearchTypeValue,search); 
 
-        /*this.setState({
-            selectedValue: safeSearchTypeValue
-        });*/
+    
         console.log(search);
     }
 
@@ -170,9 +151,9 @@ export default function Category(/*{props} : { props: any}*/props: any) {
         <h2 className="loading">Hleð gögnum...</h2>
     )}
     {!loading && (
-      <div className="haldari">
+      <div className="Phaldari">
         <h2>{fyrirsogn}</h2>
-        <input className={"v"} /*type={type}*/ onChange={e => change(e)}/>
+        Leita: <input className={"v"} /*type={type}*/ onChange={e => change(e)}/>
         <button className={"v"} onClick={onClick}>Leita</button>
         {fall(categories)}
         {fall2()}
@@ -183,31 +164,4 @@ export default function Category(/*{props} : { props: any}*/props: any) {
 
 }
 
-/*Category.getInitialProps = async ({query} : { query: any}) => {
-  const{index} = query;
-  //const todo = await getCategory(index);
-  console.log("loggi logg")
 
-  return { index };
-}*/
-
-/*function Home(props) {
-
-  const { todo,id } = props;
-  console.log(todo)
-  return (
-    <Layout title =  {todo.title}>
-     <TodoDetail
-       todo={todo}
-     />
-
-   </Layout>
-  );
-}*/
-/*Home.getInitialProps = async ({ query }) => {
-  const{id} = query;
-  const todo = await getCategory(id);
-  console.log("loggi logg")
-
-  return { id, todo };
-}*/
