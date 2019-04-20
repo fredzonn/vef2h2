@@ -37,7 +37,6 @@ export function Product(props: any, state: IProductState) {
   function handleInputChange(e: React.FormEvent<HTMLInputElement>): void {
     const { value } = e.currentTarget;
     fjoldi = Number(value);
-    console.log(fjoldi);
   }
 
   function fall(product: IProduct | undefined) {
@@ -80,7 +79,7 @@ export function Product(props: any, state: IProductState) {
   }
 
   function fall2(categories: IProduct[] | undefined) {
-    console.log(categories)
+
     if (categories !== undefined) {
       return (
 
