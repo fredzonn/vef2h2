@@ -6,8 +6,8 @@ import { postCart } from '../../actions/getCart';
 
 interface IAddToCartState {
     onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-    fjoldi?: number;
-    voruNR?: number;
+    fjoldi: number;
+    voruNR: number;
 }
 
 interface IAddToCartProps {
